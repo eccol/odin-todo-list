@@ -1,6 +1,6 @@
 import './style.css';
-import TodoItem from './todoFactory.js';
-import TodoProject from './projectFactory.js';
+import TodoItem from './TodoItem.js';
+import TodoProject from './Project.js';
 import DisplayController from './displayController.js';
 
 const defaultProject = new TodoProject('Default Project');
