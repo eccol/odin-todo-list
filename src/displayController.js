@@ -1,22 +1,25 @@
 export default class DisplayController {
   printProject(project) {
-    const container = document.createElement('div');
-    const heading = document.createElement('h1');
-    heading.innerText = project.title;
+    const container = this.createElement('div');
+    const heading = this.createElement('h1', project.title);
 
     container.appendChild(heading);
     document.body.appendChild(container);
   }
 
   printTodo(todo) {
-    const container = document.createElement('div');
-    const heading = document.createElement('h2');
-    heading.innerText = todo.title;
-    const body = document.createElement('p');
-    body.innerText = todo.description;
+    const container = this.createElement('div');
+    const heading = this.createElement('h2', todo.title);
+    const body = this.createElement('p', todo.description);
 
     container.appendChild(heading);
     container.appendChild(body);
     document.body.appendChild(container);
+  }
+
+  createElement(type, content) {
+    const element = document.createElement(type);
+    if (content) { element.innerText = content };
+    return element;
   }
 }
