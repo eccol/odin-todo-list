@@ -10,4 +10,3 @@ console.log(defaultProject);
 
 const displayController = new DisplayController;
 displayController.printProject(defaultProject);
-displayController.printTodo(defaultTodo);

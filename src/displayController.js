@@ -5,6 +5,8 @@ export default class DisplayController {
 
     container.appendChild(heading);
     document.body.appendChild(container);
+
+    for (let todo of project.todoItems) { this.printTodo(todo) };
   }
 
   printTodo(todo) {
