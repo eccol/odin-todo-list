@@ -1,7 +1,11 @@
 class Project {
   constructor(title) {
     this.title = title;
-    todoItems = [];
+    this.todoItems = [];
+  }
+
+  addTodo(todo) {
+    this.todoItems.push(todo);
   }
 }
 
