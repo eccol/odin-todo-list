@@ -8,22 +8,24 @@ export default class DisplayController {
     const allProjects = this.projectsController.projects;
     this.projectsContainer.innerHTML = '';
     for (let project of allProjects) {
-      this.printProject(project);
+      const projectElement = this.createProjectElement(project);
+      this.projectsContainer.appendChild(projectElement);
     }
   }
 
-  printProject(project) {
+  createProjectElement(project) {
     const container = this.createElementWithText('div');
     container.classList.add('project-container');
     const heading = this.createElementWithText('h1', project.title);
 
     container.appendChild(heading);
-    this.projectsContainer.appendChild(container);
 
     for (let todo of project.todoItems) {
       const todoElement = this.createTodoElement(todo);
       container.appendChild(todoElement);
     }
+
+    return container;
   }
 
   createTodoElement(todo) {
