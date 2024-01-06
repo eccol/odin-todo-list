@@ -12,6 +12,21 @@
   <button class="new-project-button" type="button">New Project</button>
   <label for="new-project-name">Title</label>
   <input type="text" name="new-project-name" id="new-project-name">
+
+  <dialog id="new-todo-dialog">
+    <h1>New Todo Item</h1>
+    <label for="new-todo-name">Title</label>
+    <input type="text" name="new-todo-name" id="new-todo-name">
+    <label for="new-todo-body">Description</label>
+    <input type="text" name="new-todo-body" id="new-todo-body">
+    <label for="new-todo-due">Due Date</label>
+    <input type="text" name="new-todo-due" id="new-todo-due">
+    <label for="new-todo-priority">Priority</label>
+    <input type="text" name="new-todo-priority" id="new-todo-priority">
+    <input type="hidden" name="projectid" id="new-todo-projectid">
+    <button id="new-todo-submit">Submit</button>
+    <button id="new-todo-cancel">Cancel</button>
+  </dialog>
 </body>
 
 </html>
