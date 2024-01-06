@@ -1,3 +1,3 @@
 import './style.css';
-import todoFactory from './todoFactory.js';
-import projectFactory from './projectFactory.js';
+import { createTodoItem } from './todoFactory.js';
+import { createProject } from './projectFactory.js';
