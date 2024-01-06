@@ -3,6 +3,13 @@ export default class DisplayController {
     this.projectsContainer = document.querySelector('.projects-container');
   }
 
+  update(projects) {
+    this.projectsContainer.innerHTML = '';
+    for (let project of projects) {
+      this.printProject(project);
+    }
+  }
+
   printProject(project) {
     const container = this.createElementWithText('div');
     container.classList.add('project-container');
