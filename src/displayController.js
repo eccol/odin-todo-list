@@ -1,11 +1,13 @@
 export default class DisplayController {
-  constructor() {
+  constructor(projectsController) {
     this.projectsContainer = document.querySelector('.projects-container');
+    this.projectsController = projectsController;
   }
 
-  update(projects) {
+  update() {
+    const allProjects = this.projectsController.projects;
     this.projectsContainer.innerHTML = '';
-    for (let project of projects) {
+    for (let project of allProjects) {
       this.printProject(project);
     }
   }
