@@ -34,6 +34,13 @@ export default class DisplayController {
     });
     container.appendChild(addTaskButton);
 
+    const button = createElementWithText('button', 'Delete Project');
+    button.addEventListener('click', () => {
+      this.projectsController.deleteProject(project);
+      this.update();
+    })
+    container.appendChild(button);
+
     return container;
   }
 

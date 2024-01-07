@@ -15,6 +15,14 @@ export default class ProjectsController {
     this.projects.push(new TodoProject(title));
   }
 
+  deleteProject(project) {
+    for (let p of this.projects) {
+      if (p === project) {
+        this.projects.splice(this.projects.indexOf(project), 1);
+      }
+    }
+  }
+
   createTask(project, title, description, dueDate, priority) {
     const newTask = new TodoTask(title, description, dueDate, priority);
     project.addTask(newTask);
