@@ -16,6 +16,7 @@ export default class Task {
   }
 
   get dueDate() {
+    if (!this._dueDate) { return null; }
     return this._dueDate.toLocaleDateString();
   }
 
