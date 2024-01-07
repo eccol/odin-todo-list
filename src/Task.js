@@ -4,7 +4,7 @@ export default class Task {
   constructor(title, description, dueDate, priority) {
     this.title = title;
     this.description = description;
-    this.dueDate = dueDate;
+    this._dueDate = dueDate;
     this.priority = priority;
     this.complete = false;
     this.id = Task.id;
@@ -13,6 +13,14 @@ export default class Task {
 
   toggleComplete() {
     this.complete = !this.complete;
+  }
+
+  get dueDate() {
+    return this._dueDate.toLocaleDateString();
+  }
+
+  set dueDate(dueDate) {
+    this._dueDate = dueDate;
   }
 }
 

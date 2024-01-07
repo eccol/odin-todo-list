@@ -93,7 +93,7 @@ export default class DisplayController {
 
     const newTitle = newTitleField.value || "New Task";
     const newDescription = newDescriptionField.value || "New Task";
-    const newDate = newDateField.value || "Due Date";
+    const newDate = newDateField.valueAsDate || new Date();
     const newPriority = newPriorityField.value || "Priority";
     const newProjectid = newProjectidField.value;
     newTitleField.value = '';

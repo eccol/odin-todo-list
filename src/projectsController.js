@@ -40,9 +40,11 @@ export default class ProjectsController {
   }
 
   makeDefaultProject() {
+    const tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
     this.createProject('Default Project');
-    const defaultTodo = new TodoTask('Default Todo', 'A default todo item', 'duedate', 'low');
-    const testTodo = new TodoTask('another todo', 'descirpto', 'duedate', 'high');
+    const defaultTodo = new TodoTask('Default Todo', 'A default todo item', tomorrow, 'low');
+    const testTodo = new TodoTask('another todo', 'descirpto', tomorrow, 'high');
     this.projects[0].addTask(defaultTodo);
     this.projects[0].addTask(testTodo);
   }
