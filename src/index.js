@@ -20,3 +20,7 @@ document.querySelector('.new-project-button').addEventListener('click', () => {
 document.getElementById('save-button').addEventListener('click', () => {
   localStorage.setItem('allProjects', JSON.stringify(projectsController.projects));
 });
+
+document.getElementById('delete-saved-data-button').addEventListener('click', () => {
+  localStorage.removeItem('allProjects');
+})
