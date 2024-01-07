@@ -7,11 +7,14 @@ export default class StorageController {
     };
 
     const parse = JSON.parse(savedProjects);
+    console.log(parse);
 
     for (let project of parse) {
       const newProject = projectsController.createProject(project.title);
       for (let task of project.tasks) {
-        const newTask = projectsController.createTask(newProject, task.title, task.description, task.dueDate, task.priority);
+        let loadedDate = task._dueDate;
+        if (loadedDate) { loadedDate = new Date(loadedDate) };
+        const newTask = projectsController.createTask(newProject, task.title, task.description, loadedDate, task.priority);
         if (task.complete) {
           newTask.toggleComplete();
         }
