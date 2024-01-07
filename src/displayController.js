@@ -41,9 +41,13 @@ export default class DisplayController {
     const container = createElementWithText('div', null, 'task-container');
     const heading = createElementWithText('h2', task.title);
     const body = createElementWithText('p', task.description);
+    const dueDate = createElementWithText('p', task.dueDate);
+    const priority = createElementWithText('p', task.priority);
 
     container.appendChild(heading);
     container.appendChild(body);
+    container.appendChild(dueDate);
+    container.appendChild(priority);
     return container;
   }
 

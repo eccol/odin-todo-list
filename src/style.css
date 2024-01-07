@@ -1,0 +1,15 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.project-container {
+  border: 1px black solid;
+  border-radius: 5px;
+  margin: 5px;
+  padding: 1rem;
+}
+
+.task-container {
+  border-bottom: 1px black solid;
+}
