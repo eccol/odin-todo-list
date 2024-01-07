@@ -4,6 +4,11 @@ export default class TodoItem {
     this.description = description;
     this.dueDate = dueDate;
     this.priority = priority;
+    this.complete = false;
+  }
+
+  toggleComplete() {
+    this.complete = !this.complete;
   }
 }
 
