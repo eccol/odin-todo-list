@@ -34,3 +34,8 @@
 .task-container.completed h2 {
   text-decoration: line-through;
 }
+
+.overdue {
+  color: red;
+  font-weight: bold;
+}

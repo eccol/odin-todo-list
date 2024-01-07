@@ -23,6 +23,14 @@ export default class Task {
   set dueDate(dueDate) {
     this._dueDate = dueDate;
   }
+
+  get overdue() {
+    if (this._dueDate) {
+      return this._dueDate < new Date();
+    } else {
+      return false;
+    }
+  }
 }
 
 export function createTask(title, description, dueDate, priority) {

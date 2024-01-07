@@ -68,6 +68,7 @@ export default class DisplayController {
     taskHeader.appendChild(deleteTask);
 
     const dueDate = createElementWithText('p', 'Due ' + task.dueDate);
+    if (task.overdue) { dueDate.classList.add('overdue') };
     const priority = createElementWithText('p', task.priority + ' Priority');
     const body = createElementWithText('p', task.description);
     if (task.dueDate) { taskBody.appendChild(dueDate) };
