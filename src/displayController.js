@@ -69,7 +69,7 @@ export default class DisplayController {
     const dueDate = createElementWithText('p', 'Due ' + task.dueDate);
     const priority = createElementWithText('p', task.priority + ' Priority');
     const body = createElementWithText('p', task.description);
-    taskBody.appendChild(dueDate);
+    if (task.dueDate) { taskBody.appendChild(dueDate) };
     taskBody.appendChild(priority);
     taskBody.appendChild(body);
 
