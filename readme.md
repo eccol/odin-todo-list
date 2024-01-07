@@ -4,7 +4,7 @@ The goal is to create a todo list entirely in Javascript.
 
 Current status:  
 * Can add and remove projects and their sub-tasks.  
-* Can toggle tasks as complete.
+* Can toggle tasks as complete.  
 * Can save to localstorage.
 
 Left to do:  
