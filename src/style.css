@@ -30,3 +30,7 @@
 .task-header input {
   margin-right: 10px;
 }
+
+.task-container.completed h2 {
+  text-decoration: line-through;
+}
