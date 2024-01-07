@@ -17,30 +17,30 @@ export default class DisplayController {
   }
 
   createProjectElement(project) {
-    const container = createElementWithText('div', null, 'todo-container');
+    const container = createElementWithText('div', null, 'project-container');
     const heading = createElementWithText('h1', project.title);
 
     container.appendChild(heading);
 
-    for (let todo of project.todoItems) {
-      const todoElement = this.createTodoElement(todo);
-      container.appendChild(todoElement);
+    for (let task of project.tasks) {
+      const taskElement = this.createTaskElement(task);
+      container.appendChild(taskElement);
     }
 
-    const addTodoButton = createElementWithText('button', 'New Item', 'add-todo-button');
-    addTodoButton.addEventListener('click', () => {
-      document.getElementById('new-todo-projectid').value = project.id;
-      document.getElementById('new-todo-dialog').showModal();
+    const addTaskButton = createElementWithText('button', 'New Item', 'add-task-button');
+    addTaskButton.addEventListener('click', () => {
+      document.getElementById('new-task-projectid').value = project.id;
+      document.getElementById('new-task-dialog').showModal();
     });
-    container.appendChild(addTodoButton);
+    container.appendChild(addTaskButton);
 
     return container;
   }
 
-  createTodoElement(todo) {
-    const container = createElementWithText('div', null, 'todo-container');
-    const heading = createElementWithText('h2', todo.title);
-    const body = createElementWithText('p', todo.description);
+  createTaskElement(task) {
+    const container = createElementWithText('div', null, 'task-container');
+    const heading = createElementWithText('h2', task.title);
+    const body = createElementWithText('p', task.description);
 
     container.appendChild(heading);
     container.appendChild(body);
@@ -48,26 +48,26 @@ export default class DisplayController {
   }
 
   createEventListeners() {
-    const cancelButton = document.getElementById('new-todo-cancel');
+    const cancelButton = document.getElementById('new-task-cancel');
     cancelButton.addEventListener('click', () => {
-      document.getElementById('new-todo-dialog').close();
+      document.getElementById('new-task-dialog').close();
     })
 
-    const submitButton = document.getElementById('new-todo-submit');
+    const submitButton = document.getElementById('new-task-submit');
     submitButton.addEventListener('click', () => {
-      this.readTodoDialog();
+      this.readTaskDialog();
     })
   }
 
-  readTodoDialog() {
-    const newTitleField = document.getElementById('new-todo-name');
-    const newDescriptionField = document.getElementById('new-todo-body');
-    const newDateField = document.getElementById('new-todo-due');
-    const newPriorityField = document.getElementById('new-todo-priority');
-    const newProjectidField = document.getElementById('new-todo-projectid');
+  readTaskDialog() {
+    const newTitleField = document.getElementById('new-task-name');
+    const newDescriptionField = document.getElementById('new-task-body');
+    const newDateField = document.getElementById('new-task-due');
+    const newPriorityField = document.getElementById('new-task-priority');
+    const newProjectidField = document.getElementById('new-task-projectid');
 
-    const newTitle = newTitleField.value || "New Todo";
-    const newDescription = newDescriptionField.value || "New Todo";
+    const newTitle = newTitleField.value || "New Task";
+    const newDescription = newDescriptionField.value || "New Task";
     const newDate = newDateField.value || "Due Date";
     const newPriority = newPriorityField.value || "Priority";
     const newProjectid = newProjectidField.value;
@@ -77,8 +77,8 @@ export default class DisplayController {
     newPriorityField.value = '';
 
     const project = this.projectsController.getProjectById(newProjectid);
-    this.projectsController.createTodo(project, newTitle, newDescription, newDate, newPriority);
-    document.getElementById('new-todo-dialog').close();
+    this.projectsController.createTask(project, newTitle, newDescription, newDate, newPriority);
+    document.getElementById('new-task-dialog').close();
     this.update();
   }
 }

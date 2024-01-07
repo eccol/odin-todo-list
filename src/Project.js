@@ -3,13 +3,13 @@ export default class Project {
 
   constructor(title) {
     this.title = title;
-    this.todoItems = [];
+    this.tasks = [];
     this.id = Project.count;
     Project.count += 1;
   }
 
-  addTodo(todo) {
-    this.todoItems.push(todo);
+  addTask(newTask) {
+    this.tasks.push(newTask);
   }
 }
 

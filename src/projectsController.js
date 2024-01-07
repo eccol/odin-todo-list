@@ -1,4 +1,4 @@
-import TodoItem from './TodoItem.js';
+import TodoTask from './Task.js';
 import TodoProject from './Project.js';
 
 export default class ProjectsController {
@@ -15,17 +15,17 @@ export default class ProjectsController {
     this.projects.push(new TodoProject(title));
   }
 
-  createTodo(project, title, description, dueDate, priority) {
-    const newTodo = new TodoItem(title, description, dueDate, priority);
-    project.addTodo(newTodo);
+  createTask(project, title, description, dueDate, priority) {
+    const newTask = new TodoTask(title, description, dueDate, priority);
+    project.addTask(newTask);
   }
 
   makeDefaultProject() {
     this.createProject('Default Project');
-    const defaultTodo = new TodoItem('Default Todo', 'A default todo item', 'duedate', 'low');
-    const testTodo = new TodoItem('another todo', 'descirpto', 'duedate', 'high');
-    this.projects[0].addTodo(defaultTodo);
-    this.projects[0].addTodo(testTodo);
+    const defaultTodo = new TodoTask('Default Todo', 'A default todo item', 'duedate', 'low');
+    const testTodo = new TodoTask('another todo', 'descirpto', 'duedate', 'high');
+    this.projects[0].addTask(defaultTodo);
+    this.projects[0].addTask(testTodo);
   }
 
   getProjectById(id) {

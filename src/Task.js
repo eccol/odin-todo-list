@@ -1,4 +1,4 @@
-export default class TodoItem {
+export default class Task {
   constructor(title, description, dueDate, priority) {
     this.title = title;
     this.description = description;
@@ -12,6 +12,6 @@ export default class TodoItem {
   }
 }
 
-export function createTodoItem(title, description, dueDate, priority) {
-  return new TodoItem(title, description, dueDate, priority);
+export function createTask(title, description, dueDate, priority) {
+  return new Task(title, description, dueDate, priority);
 }
