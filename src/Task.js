@@ -25,7 +25,7 @@ export default class Task {
   }
 
   get overdue() {
-    if (this._dueDate) {
+    if (this._dueDate && !this.complete) {
       return this._dueDate < new Date();
     } else {
       return false;
