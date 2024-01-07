@@ -45,7 +45,10 @@ export default class DisplayController {
   }
 
   createTaskElement(task) {
-    const container = createElementWithText('div', null, 'task-container');
+    const taskContainer = createElementWithText('div', null, 'task-container');
+    const taskHeader = createElementWithText('div', null, 'task-header');
+    const taskBody = createElementWithText('div', null, 'task-body');
+
     const completed = document.createElement('input');
     completed.type = 'checkbox';
     completed.dataset.taskid = task.id;
@@ -54,22 +57,25 @@ export default class DisplayController {
       task.toggleComplete();
     })
     const heading = createElementWithText('h2', task.title);
-    const body = createElementWithText('p', task.description);
-    const dueDate = createElementWithText('p', task.dueDate);
-    const priority = createElementWithText('p', task.priority);
     const deleteTask = createElementWithText('button', 'Delete Task');
     deleteTask.addEventListener('click', () => {
       this.projectsController.deleteTask(task);
       this.update();
     })
+    taskHeader.appendChild(completed);
+    taskHeader.appendChild(heading);
+    taskHeader.appendChild(deleteTask);
 
-    container.appendChild(completed);
-    container.appendChild(heading);
-    container.appendChild(body);
-    container.appendChild(dueDate);
-    container.appendChild(priority);
-    container.appendChild(deleteTask);
-    return container;
+    const dueDate = createElementWithText('p', 'Due ' + task.dueDate);
+    const priority = createElementWithText('p', task.priority + ' Priority');
+    const body = createElementWithText('p', task.description);
+    taskBody.appendChild(dueDate);
+    taskBody.appendChild(priority);
+    taskBody.appendChild(body);
+
+    taskContainer.appendChild(taskHeader);
+    taskContainer.appendChild(taskBody);
+    return taskContainer;
   }
 
   createEventListeners() {

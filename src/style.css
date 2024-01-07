@@ -10,6 +10,23 @@
   padding: 1rem;
 }
 
+.project-container h1 {
+  margin-bottom: 10px;
+}
+
 .task-container {
-  border-bottom: 1px black solid;
+  /* border-bottom: 1px black solid; */
+  margin-bottom: 15px;
+}
+
+.task-header {
+  display: flex;
+}
+
+.task-header h2 {
+  margin-right: auto;
+}
+
+.task-header input {
+  margin-right: 10px;
 }
