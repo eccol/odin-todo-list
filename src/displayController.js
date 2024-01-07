@@ -50,12 +50,18 @@ export default class DisplayController {
     const body = createElementWithText('p', task.description);
     const dueDate = createElementWithText('p', task.dueDate);
     const priority = createElementWithText('p', task.priority);
+    const deleteTask = createElementWithText('button', 'Delete Task');
+    deleteTask.addEventListener('click', () => {
+      this.projectsController.deleteTask(task);
+      this.update();
+    })
 
     container.appendChild(completed);
     container.appendChild(heading);
     container.appendChild(body);
     container.appendChild(dueDate);
     container.appendChild(priority);
+    container.appendChild(deleteTask);
     return container;
   }
 

@@ -20,6 +20,17 @@ export default class ProjectsController {
     project.addTask(newTask);
   }
 
+  deleteTask(task) {
+    for (let p of this.projects) {
+      for (let t of p.tasks) {
+        if (t === task) {
+          p.tasks.splice(p.tasks.indexOf(task), 1);
+          return;
+        }
+      }
+    }
+  }
+
   makeDefaultProject() {
     this.createProject('Default Project');
     const defaultTodo = new TodoTask('Default Todo', 'A default todo item', 'duedate', 'low');
