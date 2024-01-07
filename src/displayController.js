@@ -39,11 +39,19 @@ export default class DisplayController {
 
   createTaskElement(task) {
     const container = createElementWithText('div', null, 'task-container');
+    const completed = document.createElement('input');
+    completed.type = 'checkbox';
+    completed.dataset.taskid = task.id;
+    if (task.completed) { completed.checked = true; }
+    completed.addEventListener('change', () => {
+      task.toggleComplete();
+    })
     const heading = createElementWithText('h2', task.title);
     const body = createElementWithText('p', task.description);
     const dueDate = createElementWithText('p', task.dueDate);
     const priority = createElementWithText('p', task.priority);
 
+    container.appendChild(completed);
     container.appendChild(heading);
     container.appendChild(body);
     container.appendChild(dueDate);
