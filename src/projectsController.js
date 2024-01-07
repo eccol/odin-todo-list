@@ -4,7 +4,6 @@ import TodoProject from './Project.js';
 export default class ProjectsController {
   constructor() {
     this.projects = [];
-    this.makeDefaultProject();
   }
 
   addProject(project) {
@@ -12,7 +11,9 @@ export default class ProjectsController {
   }
 
   createProject(title) {
-    this.projects.push(new TodoProject(title));
+    const newProject = new TodoProject(title)
+    this.projects.push(newProject);
+    return newProject;
   }
 
   deleteProject(project) {
@@ -26,6 +27,7 @@ export default class ProjectsController {
   createTask(project, title, description, dueDate, priority) {
     const newTask = new TodoTask(title, description, dueDate, priority);
     project.addTask(newTask);
+    return newTask;
   }
 
   deleteTask(task) {
