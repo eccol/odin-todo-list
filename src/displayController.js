@@ -18,8 +18,18 @@ export default class DisplayController {
 
   createProjectElement(project) {
     const container = createElementWithText('div', null, 'project-container');
+    const projectHeader = createElementWithText('div', null, 'project-header');
     const heading = createElementWithText('h1', project.title + ' (' + project.percentCompleted + '%)');
-    container.appendChild(heading);
+    projectHeader.appendChild(heading);
+
+    const button = createElementWithText('button', 'X', 'delete-button');
+    button.addEventListener('click', () => {
+      this.projectsController.deleteProject(project);
+      this.update();
+    })
+    projectHeader.appendChild(button);
+
+    container.appendChild(projectHeader);
 
     for (let task of project.tasks) {
       const taskElement = this.createTaskElement(task);
@@ -32,13 +42,6 @@ export default class DisplayController {
       document.getElementById('new-task-dialog').showModal();
     });
     container.appendChild(addTaskButton);
-
-    const button = createElementWithText('button', 'Delete Project');
-    button.addEventListener('click', () => {
-      this.projectsController.deleteProject(project);
-      this.update();
-    })
-    container.appendChild(button);
 
     return container;
   }
@@ -58,7 +61,7 @@ export default class DisplayController {
     })
     if (task.complete) { completed.checked = true; }
     const heading = createElementWithText('h2', task.title);
-    const deleteTask = createElementWithText('button', 'Delete Task');
+    const deleteTask = createElementWithText('button', 'X', 'delete-button');
     deleteTask.addEventListener('click', () => {
       this.projectsController.deleteTask(task);
       this.update();

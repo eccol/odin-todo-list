@@ -19,11 +19,13 @@
   margin-bottom: 15px;
 }
 
-.task-header {
+.task-header,
+.project-header {
   display: flex;
 }
 
-.task-header h2 {
+.task-header h2,
+.project-header h1 {
   margin-right: auto;
 }
 
@@ -38,4 +40,10 @@
 .overdue {
   color: red;
   font-weight: bold;
+}
+
+.delete-button {
+  border: none;
+  outline: none;
+  background-color: transparent;
 }
