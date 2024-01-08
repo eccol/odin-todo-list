@@ -31,8 +31,9 @@ export default class DisplayController {
     })
     projectHeader.appendChild(button);
     projectHeader.addEventListener('click', () => {
-      container.classList.toggle('collapsed');
-    })
+      project.toggleCollapsed();
+      this.update();
+    });
 
     container.appendChild(projectHeader);
 
@@ -49,6 +50,7 @@ export default class DisplayController {
 
     projectBody.appendChild(addTaskButton);
     container.appendChild(projectBody);
+    if (project.collapsed) { projectBody.classList.add('collapsed') };
 
     return container;
   }
@@ -77,8 +79,9 @@ export default class DisplayController {
     taskHeader.appendChild(heading);
     taskHeader.appendChild(deleteTask);
     heading.addEventListener('click', () => {
-      taskContainer.classList.toggle('collapsed');
-    })
+      task.toggleCollapsed();
+      this.update();
+    });
 
     const dueDate = createElementWithText('p', 'Due ' + task.dueDate);
     if (task.overdue) { dueDate.classList.add('overdue') };
@@ -90,7 +93,7 @@ export default class DisplayController {
 
     taskContainer.appendChild(taskHeader);
     taskContainer.appendChild(taskBody);
-    taskContainer.classList.add('collapsed');
+    if (task.collapsed) { taskContainer.classList.add('collapsed') };
     return taskContainer;
   }
 

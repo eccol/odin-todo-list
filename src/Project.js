@@ -6,10 +6,15 @@ export default class Project {
     this.tasks = [];
     this.id = Project.count;
     Project.count += 1;
+    this.collapsed = false;
   }
 
   addTask(newTask) {
     this.tasks.push(newTask);
+  }
+
+  toggleCollapsed() {
+    this.collapsed = !this.collapsed;
   }
 
   get percentCompleted() {

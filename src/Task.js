@@ -9,10 +9,15 @@ export default class Task {
     this.complete = false;
     this.id = Task.id;
     Task.id = Task.id += 1;
+    this.collapsed = true;
   }
 
   toggleComplete() {
     this.complete = !this.complete;
+  }
+
+  toggleCollapsed() {
+    this.collapsed = !this.collapsed;
   }
 
   get dueDate() {
