@@ -32,7 +32,7 @@ export default class DisplayController {
     projectHeader.appendChild(button);
     projectHeader.addEventListener('click', () => {
       project.toggleCollapsed();
-      this.update();
+      container.classList.toggle('collapsed');
     });
 
     container.appendChild(projectHeader);
@@ -80,7 +80,7 @@ export default class DisplayController {
     taskHeader.appendChild(deleteTask);
     heading.addEventListener('click', () => {
       task.toggleCollapsed();
-      this.update();
+      taskContainer.classList.toggle('collapsed');
     });
 
     const dueDate = createElementWithText('p', 'Due ' + task.dueDate);
