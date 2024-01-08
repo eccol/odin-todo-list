@@ -1,3 +1,5 @@
+import collapsable from './collapsable.js';
+
 export default class Project {
   static count = 0;
 
@@ -6,15 +8,10 @@ export default class Project {
     this.tasks = [];
     this.id = Project.count;
     Project.count += 1;
-    this.collapsed = false;
   }
 
   addTask(newTask) {
     this.tasks.push(newTask);
-  }
-
-  toggleCollapsed() {
-    this.collapsed = !this.collapsed;
   }
 
   get percentCompleted() {
@@ -27,6 +24,8 @@ export default class Project {
     return Math.round(completeCount / totalCount * 1000) / 10;
   }
 }
+
+Object.assign(Project.prototype, collapsable);
 
 export function createProject(title) {
   return new Project(title);

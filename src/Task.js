@@ -1,3 +1,5 @@
+import collapsable from './collapsable.js';
+
 export default class Task {
   static id = 0;
 
@@ -9,15 +11,10 @@ export default class Task {
     this.complete = false;
     this.id = Task.id;
     Task.id = Task.id += 1;
-    this.collapsed = true;
   }
 
   toggleComplete() {
     this.complete = !this.complete;
-  }
-
-  toggleCollapsed() {
-    this.collapsed = !this.collapsed;
   }
 
   get dueDate() {
@@ -37,6 +34,8 @@ export default class Task {
     }
   }
 }
+
+Object.assign(Task.prototype, collapsable);
 
 export function createTask(title, description, dueDate, priority) {
   return new Task(title, description, dueDate, priority);
