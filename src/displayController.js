@@ -69,6 +69,9 @@ export default class DisplayController {
     taskHeader.appendChild(completed);
     taskHeader.appendChild(heading);
     taskHeader.appendChild(deleteTask);
+    taskHeader.addEventListener('click', () => {
+      taskContainer.classList.toggle('collapsed');
+    })
 
     const dueDate = createElementWithText('p', 'Due ' + task.dueDate);
     if (task.overdue) { dueDate.classList.add('overdue') };
@@ -80,6 +83,7 @@ export default class DisplayController {
 
     taskContainer.appendChild(taskHeader);
     taskContainer.appendChild(taskBody);
+    taskContainer.classList.add('collapsed');
     return taskContainer;
   }
 
