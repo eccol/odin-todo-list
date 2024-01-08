@@ -81,6 +81,11 @@ export default class DisplayController {
     heading.addEventListener('click', () => {
       task.toggleCollapsed();
       taskContainer.classList.toggle('collapsed');
+      if (task.collapsed) {
+        taskBody.style.maxHeight = 0;
+      } else {
+        taskBody.style.maxHeight = taskBody.scrollHeight + 'px';
+      }
     });
 
     const dueDate = createElementWithText('p', 'Due ' + task.dueDate);
@@ -90,10 +95,14 @@ export default class DisplayController {
     if (task.dueDate) { taskBody.appendChild(dueDate) };
     taskBody.appendChild(priority);
     taskBody.appendChild(body);
+    taskBody.style.maxHeight = taskBody.scrollHeight + 'px';
+    if (task.collapsed) {
+      taskContainer.classList.add('collapsed');
+      taskBody.style.maxHeight = 0;
+    }
 
     taskContainer.appendChild(taskHeader);
     taskContainer.appendChild(taskBody);
-    if (task.collapsed) { taskContainer.classList.add('collapsed') };
     return taskContainer;
   }
 

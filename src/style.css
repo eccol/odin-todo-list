@@ -48,7 +48,8 @@
   background-color: transparent;
 }
 
-.collapsed .task-body,
-.collapsed .project-body {
-  display: none;
+.task-body,
+.project-body {
+  transition: max-height 0.3s ease;
+  overflow: hidden;
 }
