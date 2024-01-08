@@ -22,18 +22,23 @@ export default class DisplayController {
     const heading = createElementWithText('h1', project.title + ' (' + project.percentCompleted + '%)');
     projectHeader.appendChild(heading);
 
+    const projectBody = createElementWithText('div', null, 'project-body');
+
     const button = createElementWithText('button', 'X', 'delete-button');
     button.addEventListener('click', () => {
       this.projectsController.deleteProject(project);
       this.update();
     })
     projectHeader.appendChild(button);
+    projectHeader.addEventListener('click', () => {
+      container.classList.toggle('collapsed');
+    })
 
     container.appendChild(projectHeader);
 
     for (let task of project.tasks) {
       const taskElement = this.createTaskElement(task);
-      container.appendChild(taskElement);
+      projectBody.appendChild(taskElement);
     }
 
     const addTaskButton = createElementWithText('button', 'New Item', 'add-task-button');
@@ -41,7 +46,9 @@ export default class DisplayController {
       document.getElementById('new-task-projectid').value = project.id;
       document.getElementById('new-task-dialog').showModal();
     });
-    container.appendChild(addTaskButton);
+
+    projectBody.appendChild(addTaskButton);
+    container.appendChild(projectBody);
 
     return container;
   }

@@ -48,6 +48,7 @@
   background-color: transparent;
 }
 
-.collapsed .task-body {
+.collapsed .task-body,
+.collapsed .project-body {
   display: none;
 }
