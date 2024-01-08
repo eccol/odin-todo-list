@@ -76,7 +76,7 @@ export default class DisplayController {
     taskHeader.appendChild(completed);
     taskHeader.appendChild(heading);
     taskHeader.appendChild(deleteTask);
-    taskHeader.addEventListener('click', () => {
+    heading.addEventListener('click', () => {
       taskContainer.classList.toggle('collapsed');
     })
 
