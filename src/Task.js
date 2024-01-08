@@ -9,7 +9,7 @@ export default class Task {
     this.complete = false;
     this.id = Task.id;
     Task.id = Task.id += 1;
-    this.collapsed = true;
+    this.collapsed = false;
   }
 
   toggleComplete() {
