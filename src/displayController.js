@@ -66,7 +66,7 @@ export default class DisplayController {
     completed.dataset.taskid = task.id;
     completed.addEventListener('change', () => {
       task.toggleComplete();
-      this.update();
+      taskContainer.classList.toggle('completed');
     })
     if (task.complete) { completed.checked = true; }
     const heading = createElementWithText('h2', task.title);
