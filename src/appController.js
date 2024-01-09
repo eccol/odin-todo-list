@@ -10,6 +10,7 @@ export default class AppController {
     this.displayController.projectsController = this.projectsController; //smelly
     this.createEventListeners();
     this.displayController.updateProjectList(this.projectsController.projects);
+    this.displayController.updateProject(this.projectsController.projects[0]);
   }
 
   createEventListeners() {
@@ -37,8 +38,9 @@ export default class AppController {
 
     document.getElementById('new-project-submit').addEventListener('click', () => {
       const title = this.readProjectDialog();
-      this.projectsController.createProject(title);
+      const newProject = this.projectsController.createProject(title);
       this.displayController.updateProjectList(this.projectsController.projects);
+      this.displayController.updateProject(newProject);
     })
 
     document.getElementById('save-button').addEventListener('click', () => {
