@@ -83,11 +83,11 @@ export default class DisplayController {
     taskHeader.appendChild(heading);
     taskHeader.appendChild(deleteTask);
     heading.addEventListener('click', () => {
-      taskContainer.classList.toggle('collapsed');
-      if (taskContainer.classList.contains('collapsed')) {
-        taskBody.style.maxHeight = 0;
-      } else {
+      taskContainer.classList.toggle('expanded');
+      if (taskContainer.classList.contains('expanded')) {
         taskBody.style.maxHeight = taskBody.scrollHeight + 'px';
+      } else {
+        taskBody.style.maxHeight = 0;
       }
     });
 
@@ -102,7 +102,7 @@ export default class DisplayController {
     taskContainer.appendChild(taskHeader);
     taskContainer.appendChild(taskBody);
     // Elements have no scrollheight before being drawn so temporarily set maxHeight to a large number
-    taskBody.style.maxHeight = '500' + 'px';
+    taskBody.style.maxHeight = 0;
 
     taskContainer.dataset.taskid = task.id;
     return taskContainer;
