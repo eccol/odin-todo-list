@@ -1,5 +1,3 @@
-import collapsable from './collapsable.js';
-
 export default class Task {
   static id = 0;
 
@@ -34,8 +32,6 @@ export default class Task {
     }
   }
 }
-
-Object.assign(Task.prototype, collapsable);
 
 export function createTask(title, description, dueDate, priority) {
   return new Task(title, description, dueDate, priority);
