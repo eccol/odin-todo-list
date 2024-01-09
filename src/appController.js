@@ -56,12 +56,11 @@ export default class AppController {
     const title = newTitleField.value || "New Task";
     const description = newDescriptionField.value || "New Task";
     const dueDate = newDateField.valueAsDate;
-    const priority = newPriorityField.value || "Priority";
+    const priority = newPriorityField.value || "Normal";
     const projectid = newProjectidField.value;
     newTitleField.value = '';
     newDescriptionField.value = '';
     newDateField.value = '';
-    newPriorityField.value = '';
 
     return { title, description, dueDate, priority, projectid };
   }

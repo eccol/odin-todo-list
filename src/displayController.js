@@ -24,6 +24,7 @@ export default class DisplayController {
     addTaskButton.addEventListener('click', () => {
       document.getElementById('new-task-projectid').value = project.id;
       document.getElementById('new-task-dialog').showModal();
+      document.getElementById('normal').value = 'Normal'; // Default value
     });
     projectContainer.appendChild(addTaskButton);
 
