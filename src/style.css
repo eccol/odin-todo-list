@@ -1,31 +1,57 @@
 * {
   margin: 0;
   padding: 0;
+  list-style: none;
+}
+
+/* General layout */
+
+html {
+  height: 100%;
 }
 
 body {
-  display: grid;
-  grid-template-areas: 'header header'
-    'projects-list project-body';
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 header {
-  grid-area: header;
+  height: min-content;
   display: flex;
   background-color: lightblue;
 }
 
+.content {
+  height: 100%;
+  display: flex;
+}
+
 .project-list-container {
-  grid-area: projects-list;
+  height: 100%;
   background-color: lightgray;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Main window styling */
+
+.project-list-container {
+  padding: 1rem;
+}
+
+.project-list-container li {
+  margin: .5rem 0;
+  font-size: 1.5rem;
 }
 
 .project-container {
-  grid-area: project-body;
+  width: 100%;
+  margin: 1rem;
 }
 
-.project-container h1 {
-  margin-bottom: 10px;
+.project-container .add-task-button {
+  margin-bottom: 1rem;
 }
 
 .task-container {

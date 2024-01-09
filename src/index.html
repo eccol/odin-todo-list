@@ -14,13 +14,15 @@
     <button type="button" id="delete-saved-data-button">Delete Saved Data</button>
   </header>
 
-  <div class="project-list-container">
-    <div class="project-list"></div>
-    <button class="new-project-button" type="button">New Project</button>
-    <label for="new-project-name">Title</label>
-    <input type="text" name="new-project-name" id="new-project-name">
+  <div class="content">
+    <aside class="project-list-container">
+      <button class="new-project-button" type="button">New Project</button>
+      <div class="project-list"></div>
+      <label for="new-project-name">Title</label>
+      <input type="text" name="new-project-name" id="new-project-name">
+    </aside>
+    <main class="project-container"></main>
   </div>
-  <div class="project-container"></div>
 
   <dialog id="new-task-dialog">
     <h1>New Task</h1>
