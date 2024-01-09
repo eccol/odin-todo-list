@@ -7,7 +7,6 @@ export default class StorageController {
     };
 
     const parse = JSON.parse(savedProjects);
-    console.log(parse);
 
     for (let project of parse) {
       const newProject = projectsController.createProject(project.title);
