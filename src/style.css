@@ -3,11 +3,32 @@
   padding: 0;
 }
 
-.project-container {
+/* .project-container {
   border: 1px black solid;
   border-radius: 5px;
   margin: 5px;
   padding: 1rem;
+} */
+
+body {
+  display: grid;
+  grid-template-areas: 'header header'
+    'projects-list project-body';
+}
+
+header {
+  grid-area: header;
+  display: flex;
+  background-color: lightblue;
+}
+
+.project-list-container {
+  grid-area: projects-list;
+  background-color: lightgray;
+}
+
+.project-container {
+  grid-area: project-body;
 }
 
 .project-container h1 {

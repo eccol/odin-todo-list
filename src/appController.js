@@ -9,7 +9,7 @@ export default class AppController {
     this.storageController.loadProjects(this.projectsController);
     this.displayController.projectsController = this.projectsController; //smelly
     this.createEventListeners();
-    this.displayController.updateAll(this.projectsController);
+    this.displayController.updateProjectList(this.projectsController.projects);
   }
 
   createEventListeners() {

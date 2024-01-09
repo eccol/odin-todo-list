@@ -5,6 +5,17 @@ export default class DisplayController {
     this.projectsContainer = document.querySelector('.projects-container');
   }
 
+  updateProjectList(projects) {
+    const projectList = document.createElement('ul');
+    projectList.classList.add('project-list');
+    for (let p of projects) {
+      const projectItem = document.createElement('li');
+      projectItem.innerText = p.title;
+      projectList.appendChild(projectItem);
+    }
+    document.querySelector('.project-list').replaceWith(projectList);
+  }
+
   updateAll(projectsController) {
     const allProjects = this.projectsController.projects;
     for (let project of allProjects) {
