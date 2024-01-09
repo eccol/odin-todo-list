@@ -26,7 +26,7 @@ export default class DisplayController {
   createProjectElement(project) {
     const container = createElementWithText('div', null, 'project-container');
     const projectHeader = createElementWithText('div', null, 'project-header');
-    const heading = createElementWithText('h1', project.title + ' (' + project.percentCompleted + '%)');
+    const heading = createElementWithText('h1', project.title);
     projectHeader.appendChild(heading);
 
     const projectBody = createElementWithText('div', null, 'project-body');
