@@ -18,11 +18,17 @@
     <aside class="project-list-container">
       <button class="new-project-button" type="button">New Project</button>
       <div class="project-list"></div>
-      <label for="new-project-name">Title</label>
-      <input type="text" name="new-project-name" id="new-project-name">
     </aside>
     <main class="project-container"></main>
   </div>
+
+  <dialog id="new-project-dialog">
+    <h1>New Project</h1>
+    <label for="new-project-name">Title</label>
+    <input type="text" name="new-project-name" id="new-project-name">
+    <button id="new-project-submit">Submit</button>
+    <button id="new-project-cancel">Cancel</button>
+  </dialog>
 
   <dialog id="new-task-dialog">
     <h1>New Task</h1>

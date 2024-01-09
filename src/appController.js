@@ -28,10 +28,16 @@ export default class AppController {
     })
 
     document.querySelector('.new-project-button').addEventListener('click', () => {
-      const newProjectTitleField = document.getElementById('new-project-name')
-      const newProjectTitle = newProjectTitleField.value;
-      newProjectTitleField.value = '';
-      this.projectsController.createProject(newProjectTitle || 'New Project');
+      document.getElementById('new-project-dialog').showModal();
+    })
+
+    document.getElementById('new-project-cancel').addEventListener('click', () => {
+      document.getElementById('new-project-dialog').close();
+    })
+
+    document.getElementById('new-project-submit').addEventListener('click', () => {
+      const title = this.readProjectDialog();
+      this.projectsController.createProject(title);
       this.displayController.updateProjectList(this.projectsController.projects);
     })
 
@@ -42,6 +48,16 @@ export default class AppController {
     document.getElementById('delete-saved-data-button').addEventListener('click', () => {
       this.storageController.deleteSavedData();
     })
+  }
+
+  readProjectDialog() {
+    document.getElementById('new-project-dialog').close();
+
+    const newTitleField = document.getElementById('new-project-name');
+    const title = newTitleField.value || 'New Project';
+    newTitleField.value = '';
+
+    return title;
   }
 
   readTaskDialog() {
