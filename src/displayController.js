@@ -14,6 +14,15 @@ export default class DisplayController {
       const projectElement = this.createProjectElement(project);
       this.projectsContainer.appendChild(projectElement);
     }
+    this.updateProgress();
+  }
+
+  updateProgress() {
+    const bars = document.querySelectorAll('.progress-bar');
+    for (let bar of bars) {
+      const project = this.projectsController.getProjectById(bar.dataset.projectid);
+      bar.style.width = `${project.percentCompleted}%`;
+    }
   }
 
   updateTask(task) {
@@ -42,6 +51,12 @@ export default class DisplayController {
     });
 
     container.appendChild(projectHeader);
+
+    const progressBar = createElementWithText('div', null, 'progress-bar');
+    progressBar.style.height = '10px';
+    progressBar.style.width = 0;
+    progressBar.dataset.projectid = project.id;
+    container.appendChild(progressBar);
 
     for (let task of project.tasks) {
       const taskElement = this.createTaskElement(task);
@@ -73,6 +88,7 @@ export default class DisplayController {
       task.toggleComplete();
       taskContainer.classList.toggle('completed');
       this.updateTask(task);
+      this.updateProgress();
     })
     if (task.complete) { completed.checked = true; }
     const heading = createElementWithText('h2', task.title);
