@@ -7,13 +7,20 @@ export default class DisplayController {
     this.createEventListeners();
   }
 
-  update() {
+  updateAll() {
     const allProjects = this.projectsController.projects;
     this.projectsContainer.innerHTML = '';
     for (let project of allProjects) {
       const projectElement = this.createProjectElement(project);
       this.projectsContainer.appendChild(projectElement);
     }
+  }
+
+  updateTask(task) {
+    const oldTaskElement = document.querySelector(`[data-taskid="${task.id}"]`);
+    const newTaskElement = this.createTaskElement(task);
+    oldTaskElement.after(newTaskElement);
+    oldTaskElement.remove();
   }
 
   createProjectElement(project) {
@@ -27,7 +34,7 @@ export default class DisplayController {
     const button = createElementWithText('button', 'X', 'delete-button');
     button.addEventListener('click', () => {
       this.projectsController.deleteProject(project);
-      this.update();
+      this.updateAll();
     })
     projectHeader.appendChild(button);
     projectHeader.addEventListener('click', () => {
@@ -65,13 +72,14 @@ export default class DisplayController {
     completed.addEventListener('change', () => {
       task.toggleComplete();
       taskContainer.classList.toggle('completed');
+      this.updateTask(task);
     })
     if (task.complete) { completed.checked = true; }
     const heading = createElementWithText('h2', task.title);
     const deleteTask = createElementWithText('button', 'X', 'delete-button');
     deleteTask.addEventListener('click', () => {
       this.projectsController.deleteTask(task);
-      this.update();
+      taskContainer.remove();
     })
     taskHeader.appendChild(completed);
     taskHeader.appendChild(heading);
@@ -97,6 +105,8 @@ export default class DisplayController {
     taskContainer.appendChild(taskBody);
     // Elements have no scrollheight before being drawn so temporarily set maxHeight to a large number
     taskBody.style.maxHeight = '500' + 'px';
+
+    taskContainer.dataset.taskid = task.id;
     return taskContainer;
   }
 
@@ -132,6 +142,6 @@ export default class DisplayController {
     const project = this.projectsController.getProjectById(newProjectid);
     this.projectsController.createTask(project, newTitle, newDescription, newDate, newPriority);
     document.getElementById('new-task-dialog').close();
-    this.update();
+    this.updateAll();
   }
 }

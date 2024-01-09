@@ -7,14 +7,14 @@ const storageController = new StorageController;
 const projectsController = new ProjectsController;
 storageController.loadProjects(projectsController);
 const displayController = new DisplayController(projectsController);
-displayController.update();
+displayController.updateAll();
 
 document.querySelector('.new-project-button').addEventListener('click', () => {
   const newProjectTitleField = document.getElementById('new-project-name')
   const newProjectTitle = newProjectTitleField.value;
   newProjectTitleField.value = '';
   projectsController.createProject(newProjectTitle || 'New Project');
-  displayController.update();
+  displayController.updateAll();
 })
 
 document.getElementById('save-button').addEventListener('click', () => {
