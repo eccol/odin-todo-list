@@ -1,28 +1,22 @@
 import createElementWithText from './createElementWithText.js';
 
 export default class DisplayController {
-  constructor(projectsController) {
+  constructor() {
     this.projectsContainer = document.querySelector('.projects-container');
-    this.projectsController = projectsController;
-    this.createEventListeners();
   }
 
-  updateAll() {
+  updateAll(projectsController) {
     const allProjects = this.projectsController.projects;
     this.projectsContainer.innerHTML = '';
     for (let project of allProjects) {
       const projectElement = this.createProjectElement(project);
       this.projectsContainer.appendChild(projectElement);
     }
-    this.updateProgress();
   }
 
-  updateProgress() {
-    const bars = document.querySelectorAll('.progress-bar');
-    for (let bar of bars) {
-      const project = this.projectsController.getProjectById(bar.dataset.projectid);
-      bar.style.width = `${project.percentCompleted}%`;
-    }
+  updateProgressBar(progressBar) {
+    const project = this.projectsController.getProjectById(progressBar.dataset.projectid);
+    progressBar.style.width = `${project.percentCompleted}%`;
   }
 
   updateTask(task) {
@@ -43,7 +37,7 @@ export default class DisplayController {
     const button = createElementWithText('button', 'X', 'delete-button');
     button.addEventListener('click', () => {
       this.projectsController.deleteProject(project);
-      this.updateAll();
+      this.updateAll(this.projectsController);
     })
     projectHeader.appendChild(button);
     projectHeader.addEventListener('click', () => {
@@ -56,6 +50,7 @@ export default class DisplayController {
     progressBar.style.height = '10px';
     progressBar.style.width = 0;
     progressBar.dataset.projectid = project.id;
+    this.updateProgressBar(progressBar);
     container.appendChild(progressBar);
 
     for (let task of project.tasks) {
@@ -88,7 +83,9 @@ export default class DisplayController {
       task.toggleComplete();
       taskContainer.classList.toggle('completed');
       this.updateTask(task);
-      this.updateProgress();
+      const project = this.projectsController.getProjectByTask(task);
+      const progressBar = document.querySelector(`[data-projectid="${project.id}"]`)
+      this.updateProgressBar(progressBar);
     })
     if (task.complete) { completed.checked = true; }
     const heading = createElementWithText('h2', task.title);
@@ -126,38 +123,25 @@ export default class DisplayController {
     return taskContainer;
   }
 
-  createEventListeners() {
-    const cancelButton = document.getElementById('new-task-cancel');
-    cancelButton.addEventListener('click', () => {
-      document.getElementById('new-task-dialog').close();
-    })
-
-    const submitButton = document.getElementById('new-task-submit');
-    submitButton.addEventListener('click', () => {
-      this.readTaskDialog();
-    })
-  }
-
   readTaskDialog() {
+    document.getElementById('new-task-dialog').close();
+
     const newTitleField = document.getElementById('new-task-name');
     const newDescriptionField = document.getElementById('new-task-body');
     const newDateField = document.getElementById('new-task-due');
     const newPriorityField = document.getElementById('new-task-priority');
     const newProjectidField = document.getElementById('new-task-projectid');
 
-    const newTitle = newTitleField.value || "New Task";
-    const newDescription = newDescriptionField.value || "New Task";
-    const newDate = newDateField.valueAsDate;
-    const newPriority = newPriorityField.value || "Priority";
-    const newProjectid = newProjectidField.value;
+    const title = newTitleField.value || "New Task";
+    const description = newDescriptionField.value || "New Task";
+    const dueDate = newDateField.valueAsDate;
+    const priority = newPriorityField.value || "Priority";
+    const projectid = newProjectidField.value;
     newTitleField.value = '';
     newDescriptionField.value = '';
     newDateField.value = '';
     newPriorityField.value = '';
 
-    const project = this.projectsController.getProjectById(newProjectid);
-    this.projectsController.createTask(project, newTitle, newDescription, newDate, newPriority);
-    document.getElementById('new-task-dialog').close();
-    this.updateAll();
+    return { title, description, dueDate, priority, projectid };
   }
 }

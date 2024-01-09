@@ -6,10 +6,6 @@ export default class ProjectsController {
     this.projects = [];
   }
 
-  addProject(project) {
-    this.projects.push(project);
-  }
-
   createProject(title) {
     const newProject = new TodoProject(title)
     this.projects.push(newProject);
@@ -24,7 +20,7 @@ export default class ProjectsController {
     }
   }
 
-  createTask(project, title, description, dueDate, priority) {
+  createTask({ project, title, description, dueDate, priority }) {
     const newTask = new TodoTask(title, description, dueDate, priority);
     project.addTask(newTask);
     return newTask;
@@ -60,6 +56,17 @@ export default class ProjectsController {
     for (let project of this.projects) {
       if (project.id == id) {
         return project;
+      }
+    }
+    return null;
+  }
+
+  getProjectByTask(task) {
+    for (let p of this.projects) {
+      for (let t of p.tasks) {
+        if (t === task) {
+          return p;
+        }
       }
     }
     return null;
