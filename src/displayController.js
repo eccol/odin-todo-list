@@ -9,91 +9,50 @@ export default class DisplayController {
     const projectList = document.createElement('ul');
     projectList.classList.add('project-list');
     for (let p of projects) {
-      const projectItem = document.createElement('li');
-      projectItem.innerText = p.title;
+      const projectItem = this.createProjectList(p);
       projectList.appendChild(projectItem);
     }
+
     document.querySelector('.project-list').replaceWith(projectList);
   }
 
-  updateAll(projectsController) {
-    const allProjects = this.projectsController.projects;
-    for (let project of allProjects) {
-      this.updateProject(project);
-    }
-  }
-
-  updateProgressBar(progressBar) {
-    const project = this.projectsController.getProjectById(progressBar.dataset.projectid);
-    progressBar.style.width = `${project.percentCompleted}%`;
-  }
-
-  updateTask(task) {
-    const oldTaskElement = document.querySelector(`[data-taskid="${task.id}"]`);
-    const newTaskElement = this.createTaskElement(task);
-    if (oldTaskElement) {
-      oldTaskElement.replaceWith(newTaskElement);
-    } else {
-      const projectid = this.projectsController.getProjectByTask(task).id;
-      const projectElement = document.querySelector(`.project-container[data-projectid=${projectid}]`);
-      projectElement.appendChild(newTaskElement);
-    }
-  }
-
   updateProject(project) {
-    const oldProjectElement = document.querySelector(`.project-container[data-projectid="${project.id}"]`);
-    console.log(oldProjectElement);
-    const newProjectElement = this.createProjectElement(project);
-    if (oldProjectElement) {
-      oldProjectElement.replaceWith(newProjectElement);
-    } else {
-      this.projectsContainer.appendChild(newProjectElement);
-    }
-  }
-
-  createProjectElement(project) {
-    const container = createElementWithText('div', null, 'project-container');
-    container.dataset.projectid = project.id;
-    const projectHeader = createElementWithText('div', null, 'project-header');
-    const heading = createElementWithText('h1', project.title);
-    projectHeader.appendChild(heading);
-
-    const projectBody = createElementWithText('div', null, 'project-body');
-
-    const button = createElementWithText('button', 'X', 'delete-button');
-    button.addEventListener('click', () => {
-      this.projectsController.deleteProject(project);
-      container.remove();
-    })
-    projectHeader.appendChild(button);
-    projectHeader.addEventListener('click', () => {
-      container.classList.toggle('collapsed');
-    });
-
-    container.appendChild(projectHeader);
-
-    const progressBar = createElementWithText('div', null, 'progress-bar');
-    progressBar.style.height = '10px';
-    progressBar.style.width = 0;
-    progressBar.dataset.projectid = project.id;
-    this.updateProgressBar(progressBar);
-    container.appendChild(progressBar);
-
-    for (let task of project.tasks) {
-      const taskElement = this.createTaskElement(task);
-      projectBody.appendChild(taskElement);
-    }
+    const projectContainer = document.createElement('div');
+    projectContainer.classList.add('project-container');
 
     const addTaskButton = createElementWithText('button', 'New Item', 'add-task-button');
     addTaskButton.addEventListener('click', () => {
       document.getElementById('new-task-projectid').value = project.id;
       document.getElementById('new-task-dialog').showModal();
     });
+    projectContainer.appendChild(addTaskButton);
 
-    projectBody.appendChild(addTaskButton);
-    container.appendChild(projectBody);
+    for (let t of project.tasks) {
+      const taskItem = this.createTaskElement(t);
+      projectContainer.appendChild(taskItem);
+    }
+    document.querySelector('.project-container').replaceWith(projectContainer);
+  }
 
-    return container;
+  updateTask(task) {
+    const taskElement = document.querySelector(`[data-taskid="${task.id}"]`);
+    taskElement.replaceWith(this.createTaskElement(task));
+  }
+
+  updateProgressBar(progressBar) {
+    return;
+    const project = this.projectsController.getProjectById(progressBar.dataset.projectid);
+    progressBar.style.width = `${project.percentCompleted}%`;
+  }
+
+  createProjectList(project) {
+    const projectItem = document.createElement('li');
+    projectItem.innerText = project.title;
+    projectItem.addEventListener('click', () => {
+      this.updateProject(project);
+    })
+
+    return projectItem;
   }
 
   createTaskElement(task) {

@@ -24,7 +24,7 @@ export default class AppController {
       const project = this.projectsController.getProjectById(args.projectid);
       Object.assign(args, { project });
       this.projectsController.createTask(args);
-      this.displayController.updateAll(this.projectsController);
+      this.displayController.updateProject(project);
     })
 
     document.querySelector('.new-project-button').addEventListener('click', () => {
@@ -32,7 +32,7 @@ export default class AppController {
       const newProjectTitle = newProjectTitleField.value;
       newProjectTitleField.value = '';
       this.projectsController.createProject(newProjectTitle || 'New Project');
-      this.displayController.updateAll(this.projectsController);
+      this.displayController.updateProjectList(this.projectsController.projects);
     })
 
     document.getElementById('save-button').addEventListener('click', () => {
