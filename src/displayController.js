@@ -95,14 +95,15 @@ export default class DisplayController {
     if (task.dueDate) { taskBody.appendChild(dueDate) };
     taskBody.appendChild(priority);
     taskBody.appendChild(body);
-    taskBody.style.maxHeight = taskBody.scrollHeight + 'px';
+
+    taskContainer.appendChild(taskHeader);
+    taskContainer.appendChild(taskBody);
+    // Elements have no scrollheight before being drawn so temporarily set maxHeight to a large number
+    taskBody.style.maxHeight = '500' + 'px';
     if (task.collapsed) {
       taskContainer.classList.add('collapsed');
       taskBody.style.maxHeight = 0;
     }
-
-    taskContainer.appendChild(taskHeader);
-    taskContainer.appendChild(taskBody);
     return taskContainer;
   }
 
