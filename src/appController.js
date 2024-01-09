@@ -20,7 +20,7 @@ export default class AppController {
 
     const submitButton = document.getElementById('new-task-submit');
     submitButton.addEventListener('click', () => {
-      const args = this.displayController.readTaskDialog();
+      const args = this.readTaskDialog();
       const project = this.projectsController.getProjectById(args.projectid);
       Object.assign(args, { project });
       this.projectsController.createTask(args);
@@ -42,5 +42,27 @@ export default class AppController {
     document.getElementById('delete-saved-data-button').addEventListener('click', () => {
       this.storageController.deleteSavedData();
     })
+  }
+
+  readTaskDialog() {
+    document.getElementById('new-task-dialog').close();
+
+    const newTitleField = document.getElementById('new-task-name');
+    const newDescriptionField = document.getElementById('new-task-body');
+    const newDateField = document.getElementById('new-task-due');
+    const newPriorityField = document.getElementById('new-task-priority');
+    const newProjectidField = document.getElementById('new-task-projectid');
+
+    const title = newTitleField.value || "New Task";
+    const description = newDescriptionField.value || "New Task";
+    const dueDate = newDateField.valueAsDate;
+    const priority = newPriorityField.value || "Priority";
+    const projectid = newProjectidField.value;
+    newTitleField.value = '';
+    newDescriptionField.value = '';
+    newDateField.value = '';
+    newPriorityField.value = '';
+
+    return { title, description, dueDate, priority, projectid };
   }
 }
