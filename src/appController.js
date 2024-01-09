@@ -32,7 +32,7 @@ export default class AppController {
       const newProjectTitle = newProjectTitleField.value;
       newProjectTitleField.value = '';
       this.projectsController.createProject(newProjectTitle || 'New Project');
-      this.displayController.updateAll();
+      this.displayController.updateAll(this.projectsController);
     })
 
     document.getElementById('save-button').addEventListener('click', () => {

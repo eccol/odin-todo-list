@@ -7,10 +7,8 @@ export default class DisplayController {
 
   updateAll(projectsController) {
     const allProjects = this.projectsController.projects;
-    this.projectsContainer.innerHTML = '';
     for (let project of allProjects) {
-      const projectElement = this.createProjectElement(project);
-      this.projectsContainer.appendChild(projectElement);
+      this.updateProject(project);
     }
   }
 
@@ -22,12 +20,29 @@ export default class DisplayController {
   updateTask(task) {
     const oldTaskElement = document.querySelector(`[data-taskid="${task.id}"]`);
     const newTaskElement = this.createTaskElement(task);
-    oldTaskElement.after(newTaskElement);
-    oldTaskElement.remove();
+    if (oldTaskElement) {
+      oldTaskElement.replaceWith(newTaskElement);
+    } else {
+      const projectid = this.projectsController.getProjectByTask(task).id;
+      const projectElement = document.querySelector(`.project-container[data-projectid=${projectid}]`);
+      projectElement.appendChild(newTaskElement);
+    }
+  }
+
+  updateProject(project) {
+    const oldProjectElement = document.querySelector(`.project-container[data-projectid="${project.id}"]`);
+    console.log(oldProjectElement);
+    const newProjectElement = this.createProjectElement(project);
+    if (oldProjectElement) {
+      oldProjectElement.replaceWith(newProjectElement);
+    } else {
+      this.projectsContainer.appendChild(newProjectElement);
+    }
   }
 
   createProjectElement(project) {
     const container = createElementWithText('div', null, 'project-container');
+    container.dataset.projectid = project.id;
     const projectHeader = createElementWithText('div', null, 'project-header');
     const heading = createElementWithText('h1', project.title);
     projectHeader.appendChild(heading);
@@ -37,7 +52,7 @@ export default class DisplayController {
     const button = createElementWithText('button', 'X', 'delete-button');
     button.addEventListener('click', () => {
       this.projectsController.deleteProject(project);
-      this.updateAll(this.projectsController);
+      container.remove();
     })
     projectHeader.appendChild(button);
     projectHeader.addEventListener('click', () => {
