@@ -8,6 +8,7 @@
 
 html {
   height: 100%;
+  overflow: hidden;
 }
 
 body {
@@ -30,8 +31,16 @@ header {
 .project-list-container {
   height: 100%;
   background-color: lightgray;
+  width: 10rem;
+  overflow-x: hidden;
+  overflow-y: auto;
   display: flex;
   flex-direction: column;
+}
+
+.project-container {
+  flex: 1 0 auto;
+  overflow: auto;
 }
 
 /* Main window styling */
@@ -41,13 +50,12 @@ header {
 }
 
 .project-list-container li {
-  margin: .5rem 0;
+  padding: .5rem 0;
   font-size: 1.5rem;
 }
 
 .project-container {
-  width: 100%;
-  margin: 1rem;
+  padding: 1rem;
 }
 
 .project-container .add-task-button {
