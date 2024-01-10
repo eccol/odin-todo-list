@@ -71,9 +71,13 @@ header {
   display: flex;
 }
 
-.task-header h2,
-.project-header h1 {
+.task-header h2 {
   margin-right: auto;
+  cursor: pointer;
+}
+
+.project-list li {
+  cursor: pointer;
 }
 
 .task-header input {

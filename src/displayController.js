@@ -52,7 +52,6 @@ export default class DisplayController {
   createProjectList(project) {
     const projectItem = document.createElement('li');
     projectItem.innerText = project.title;
-    projectItem.style.cursor = 'pointer';
     projectItem.addEventListener('click', () => {
       this.updateProject(project);
     })
@@ -89,7 +88,6 @@ export default class DisplayController {
     })
 
     taskHeader.append(completed, heading, deleteTask);
-    taskHeader.style.cursor = 'pointer';
     heading.addEventListener('click', () => {
       taskContainer.classList.toggle('expanded');
       taskBody.style.maxHeight = taskContainer.classList.contains('expanded')
