@@ -23,31 +23,35 @@
   </div>
 
   <dialog id="new-project-dialog">
-    <h1>New Project</h1>
-    <label for="new-project-name">Title</label>
-    <input type="text" name="new-project-name" id="new-project-name">
-    <button id="new-project-submit">Submit</button>
-    <button id="new-project-cancel">Cancel</button>
+    <div class="dialog-container">
+      <h1>New Project</h1>
+      <label for="new-project-name">Title</label>
+      <input type="text" name="new-project-name" id="new-project-name">
+      <button id="new-project-submit">Submit</button>
+      <button id="new-project-cancel">Cancel</button>
+    </div>
   </dialog>
 
   <dialog id="new-task-dialog">
-    <h1>New Task</h1>
-    <label for="new-task-name">Title</label>
-    <input type="text" name="new-task-name" id="new-task-name">
-    <label for="new-task-body">Description</label>
-    <input type="text" name="new-task-body" id="new-task-body">
-    <label for="new-task-due">Due Date</label>
-    <input type="date" name="new-task-due" id="new-task-due">
-    <label for="new-task-priority">Priority</label>
-    <select name="new-task-priority" id="new-task-priority">
-      <option value="High" id="high">High</option>
-      <option value="Normal" id="normal" selected>Normal</option>
-      <option value="Low" id="low">Low</option>
-    </select>
-    <input type="hidden" name="projectid" id="new-task-projectid">
-    <button id="new-task-submit">Submit</button>
-    <button id="new-task-cancel">Cancel</button>
+    <div class="dialog-container">
+      <h1>New Task</h1>
+      <label for="new-task-name">Title</label>
+      <input type="text" name="new-task-name" id="new-task-name">
+      <label for="new-task-body">Description</label>
+      <input type="text" name="new-task-body" id="new-task-body">
+      <label for="new-task-due">Due Date</label>
+      <input type="date" name="new-task-due" id="new-task-due">
+      <label for="new-task-priority">Priority</label>
+      <select name="new-task-priority" id="new-task-priority">
+        <option value="High" id="high">High</option>
+        <option value="Normal" id="normal" selected>Normal</option>
+        <option value="Low" id="low">Low</option>
+      </select>
+      <input type="hidden" name="projectid" id="new-task-projectid">
+      <button id="new-task-submit">Submit</button>
+      <button id="new-task-cancel">Cancel</button>
   </dialog>
+  </div>
 </body>
 
 </html>

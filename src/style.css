@@ -43,6 +43,25 @@ header {
   overflow: auto;
 }
 
+/* Dialog layout */
+
+dialog {
+  border: none;
+}
+
+.dialog-container {
+  position: fixed;
+  top: 20%;
+  left: 30%;
+
+  padding: 1rem 2rem;
+  background-color: white;
+  border: 5px solid black;
+
+  display: flex;
+  flex-direction: column;
+}
+
 /* Main window styling */
 
 .project-list-container {
