@@ -13,6 +13,8 @@ export default class Project {
   }
 
   get percentCompleted() {
+    if (this.tasks.length == 0) { return 0; }
+
     let completeCount = 0;
     const totalCount = this.tasks.length;
     for (let t of this.tasks) {
