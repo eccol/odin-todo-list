@@ -93,8 +93,8 @@ export default class DisplayController {
     heading.addEventListener('click', () => {
       taskContainer.classList.toggle('expanded');
       taskBody.style.maxHeight = taskContainer.classList.contains('expanded')
-        ? taskBody.style.maxHeight = taskBody.scrollHeight + 'px'
-        : taskBody.style.maxHeight = 0;
+        ? taskBody.scrollHeight + 'px'
+        : 0;
     });
 
     const dueDate = createElementWithText('p', 'Due ' + task.dueDate);
@@ -107,9 +107,10 @@ export default class DisplayController {
     taskContainer.append(taskHeader, taskBody);
 
     const previousItem = document.querySelector(`[data-taskid="${task.id}"]`);
-    taskBody.style.maxHeight = previousItem
-      ? previousItem.scrollHeight
-      : taskBody.style.maxHeight = 0;
+    const previousBody = previousItem ? previousItem.querySelector('.task-body') : null;
+    const previousHeight = previousItem ? previousBody.style.maxHeight : null;
+    taskBody.style.maxHeight = previousItem ? previousHeight : 0;
+    taskContainer.classList.toggle('expanded', previousHeight > '0px');
 
     taskContainer.dataset.taskid = task.id;
     return taskContainer;
