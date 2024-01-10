@@ -85,6 +85,7 @@ export default class DisplayController {
     deleteTask.addEventListener('click', () => {
       this.projectsController.deleteTask(task);
       taskContainer.remove();
+      this.updateProjectList(this.projectsController.projects);
     })
 
     taskHeader.append(completed, heading, deleteTask);
