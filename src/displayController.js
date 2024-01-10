@@ -65,57 +65,51 @@ export default class DisplayController {
 
   createTaskElement(task) {
     const taskContainer = createElementWithText('div', null, 'task-container');
-    if (task.complete) { taskContainer.classList.add('completed') };
+    taskContainer.classList.toggle('completed', task.complete);
+
     const taskHeader = createElementWithText('div', null, 'task-header');
     const taskBody = createElementWithText('div', null, 'task-body');
 
     const completed = document.createElement('input');
     completed.type = 'checkbox';
     completed.dataset.taskid = task.id;
+    completed.checked = task.complete;
     completed.addEventListener('change', () => {
       task.toggleComplete();
       taskContainer.classList.toggle('completed');
       this.updateTask(task);
       this.updateProjectList(this.projectsController.projects);
     })
-    if (task.complete) { completed.checked = true; }
+
     const heading = createElementWithText('h2', task.title);
     const deleteTask = createElementWithText('button', 'X', 'delete-button');
     deleteTask.addEventListener('click', () => {
       this.projectsController.deleteTask(task);
       taskContainer.remove();
     })
-    taskHeader.appendChild(completed);
-    taskHeader.appendChild(heading);
-    taskHeader.appendChild(deleteTask);
+
+    taskHeader.append(completed, heading, deleteTask);
     taskHeader.style.cursor = 'pointer';
     heading.addEventListener('click', () => {
       taskContainer.classList.toggle('expanded');
-      if (taskContainer.classList.contains('expanded')) {
-        taskBody.style.maxHeight = taskBody.scrollHeight + 'px';
-      } else {
-        taskBody.style.maxHeight = 0;
-      }
+      taskBody.style.maxHeight = taskContainer.classList.contains('expanded')
+        ? taskBody.style.maxHeight = taskBody.scrollHeight + 'px'
+        : taskBody.style.maxHeight = 0;
     });
 
     const dueDate = createElementWithText('p', 'Due ' + task.dueDate);
-    if (task.overdue) { dueDate.classList.add('overdue') };
+    dueDate.classList.toggle('overdue', task.overdue);
     const priority = createElementWithText('p', task.priority + ' Priority');
     const body = createElementWithText('p', task.description);
     if (task.dueDate) { taskBody.appendChild(dueDate) };
-    taskBody.appendChild(priority);
-    taskBody.appendChild(body);
+    taskBody.append(priority, body);
 
-    taskContainer.appendChild(taskHeader);
-    taskContainer.appendChild(taskBody);
+    taskContainer.append(taskHeader, taskBody);
 
     const previousItem = document.querySelector(`[data-taskid="${task.id}"]`);
-    if (previousItem) {
-      taskBody.style.maxHeight = previousItem.scrollHeight;
-    } else {
-      taskBody.style.maxHeight = 0;
-    }
-
+    taskBody.style.maxHeight = previousItem
+      ? previousItem.scrollHeight
+      : taskBody.style.maxHeight = 0;
 
     taskContainer.dataset.taskid = task.id;
     return taskContainer;
