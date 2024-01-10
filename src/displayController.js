@@ -40,10 +40,13 @@ export default class DisplayController {
     taskElement.replaceWith(this.createTaskElement(task));
   }
 
-  updateProgressBar(progressBar) {
-    return;
-    const project = this.projectsController.getProjectById(progressBar.dataset.projectid);
-    progressBar.style.width = `${project.percentCompleted}%`;
+  updateProgressBar(project) {
+    const progressBar = document.createElement('div');
+    progressBar.classList.add('progress-bar');
+    const completion = project.percentCompleted;
+    progressBar.style.width = `${completion}%`;
+    progressBar.style.height = '5px';
+    return progressBar;
   }
 
   createProjectList(project) {
@@ -52,6 +55,9 @@ export default class DisplayController {
     projectItem.addEventListener('click', () => {
       this.updateProject(project);
     })
+
+    const progressBar = this.updateProgressBar(project);
+    projectItem.appendChild(progressBar);
 
     return projectItem;
   }
@@ -70,8 +76,7 @@ export default class DisplayController {
       taskContainer.classList.toggle('completed');
       this.updateTask(task);
       const project = this.projectsController.getProjectByTask(task);
-      const progressBar = document.querySelector(`[data-projectid="${project.id}"]`)
-      this.updateProgressBar(progressBar);
+      this.updateProjectList(this.projectsController.projects);
     })
     if (task.complete) { completed.checked = true; }
     const heading = createElementWithText('h2', task.title);
