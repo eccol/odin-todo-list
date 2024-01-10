@@ -75,7 +75,6 @@ export default class DisplayController {
       task.toggleComplete();
       taskContainer.classList.toggle('completed');
       this.updateTask(task);
-      const project = this.projectsController.getProjectByTask(task);
       this.updateProjectList(this.projectsController.projects);
     })
     if (task.complete) { completed.checked = true; }
@@ -107,8 +106,14 @@ export default class DisplayController {
 
     taskContainer.appendChild(taskHeader);
     taskContainer.appendChild(taskBody);
-    // Elements have no scrollheight before being drawn so temporarily set maxHeight to a large number
-    taskBody.style.maxHeight = 0;
+
+    const previousItem = document.querySelector(`[data-taskid="${task.id}"]`);
+    if (previousItem) {
+      taskBody.style.maxHeight = previousItem.scrollHeight;
+    } else {
+      taskBody.style.maxHeight = 0;
+    }
+
 
     taskContainer.dataset.taskid = task.id;
     return taskContainer;
